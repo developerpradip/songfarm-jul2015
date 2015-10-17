@@ -1,5 +1,5 @@
-<?php session_start(); ?>
-<?php require_once("../includes/initialize.php"); ?>
+<?php require_once("../includes/initialize.php");
+require_once(LIB_PATH.DS."login.php"); ?>
 <!doctype html>
 <html lang="en">
     <head>

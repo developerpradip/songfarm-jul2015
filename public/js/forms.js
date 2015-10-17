@@ -81,9 +81,9 @@ $("#register-form").validate({
 			data: form_data,
 			dataType:'json',
 			success: function(data, textStatus, jqXHR){
-				console.log(data, textStatus, jqXHR);
+				// console.log(data, textStatus, jqXHR);
 				if($.inArray(true,data) != -1){
-					window.location.href = 'workshop.php';
+					window.location.href = 'workshop.php?id='+data[0];
 				} else {
 					$("#register-form div#message").append("<p>"+data+"</p>");
 					$("#register-form div#message").removeClass('hide');
@@ -127,20 +127,30 @@ $('#login-form').validate({
 		// $('#submitLogIn').submit(function(e){
 		// 	e.preventDefault();
 		// })
+		console.log('submitHandler');
 		var form 			= $('#login-form');
 		var formData 	= form.serialize();
 			$.ajax({
-				url 	: '../includes/login_val.php',
+				url 	: '../includes/login.php',
 				type 	: 'POST',
 				data 	: formData,
-				dataType : 'JSON',
 				success:function(data, textStatus, jqXHR){
-					console.log(data);
-					if($.inArray(true,data) !== -1){
-						window.location.href = 'workshop.php';
+					// successful login returns false
+					if(data == false){
+						window.location.href = 'workshop.php'
 					} else {
 						$('span#login-error').html(data);
 					}
+					// console.log(data);
+					// console.log(jqXHR);
+					// if($.inArray(true, data) != -1){
+					// 	console.log('ready to redirect');
+					// 	// window.location.href = 'workshop.php';
+					// } else {
+					// 	console.log('display error');
+					// 	console.log(data);
+					// 	//
+					// }
 				} // success
 			}) // ajax
 	} // submit handler
